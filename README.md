@@ -11,3 +11,5 @@ Server infomation gatherer for (alomost all) Windows
 
 消せない(´；ω；｀)ﾌﾞﾜｯ
 
+shellから消すのか…
+
