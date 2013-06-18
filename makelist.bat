@@ -20,6 +20,7 @@ for %%c in (dsquery.exe) do (
 		echo %%~$path:c 
 	) else (
 		echo [ERR ] missing 'dsquery.exe'
+		echo [INFO] search on google! <https://www.google.co.jp/search?q=dsquery.exe>
 		pause
 		goto :EOB
 	)
