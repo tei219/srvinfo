@@ -20,7 +20,7 @@ for %%c in (dsquery.exe) do (
 		echo %%~$path:c 
 	) else (
 		echo [ERR ] missing 'dsquery.exe'
-		echo [INFO] search on google! "http://www.google.co.jp/search?q=dsquery.exe"
+		echo [INFO] search on google! "https://www.google.co.jp/search?q=dsquery.exe"
 		pause
 		goto :EOB
 	)
@@ -39,9 +39,9 @@ for /f %%s in (listall.txt) do (
 	ping >nul -a -n 1 -w 1 -4 %%s && echo %%s >> list.txt || echo [ERR ] ping-test %%s failed.
 )
 
+:EOB
 if exist list ( del list )
 
-:EOB
 popd
 endlocal
 rem pause
