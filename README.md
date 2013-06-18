@@ -1,6 +1,6 @@
 srvinfo
 =======
 
-server infomation gatherer for (alomost all) Windows
+Server infomation gatherer for (alomost all) Windows
 
-testtest
+フォルダってどうやって作るの…？
