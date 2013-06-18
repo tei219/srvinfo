@@ -7,16 +7,13 @@ if exist listall.txt ( del listall.txt )
 if exist list.txt ( del list.txt )
 if exist list ( del list )
 
-set domainstr=
-if "%userdnsdomain%"=="REPLACE.FOR.YOUR.DOMAIN" (
-  set domainstr=CN=Computers,DC=REPLACE,DC=FOR,DC=YOUR,DC=DOMAIN
-)
-
-if "%domainstr%"=="" (
-  echo "[ERR ] undefined domain '%userdnsdomain%'"
+if "%userdnsdomain%"=="" (
+	echo "[ERR ] empty domain string '%userdnsdomain%'"
 	pause
 	goto :EOB
 )
+
+set domainstr=CN=Computers,DC=%userdnsdomain:.=,DC=%
 
 for %%c in (dsquery.exe) do (
 	if exist %%~$path:c (
