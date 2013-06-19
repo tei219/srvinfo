@@ -8,7 +8,7 @@ if not exist bin\psservice.exe (
 )
 
 if not exist bin\1st_launch (
-	bin\psexec.exe /? >nul
+	bin\psservice.exe /? >nul
 	echo 1 > bin\1st_launch
 )
 
