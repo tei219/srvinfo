@@ -1,8 +1,8 @@
 @echo off
 
-if not exist bin\psexec.exe (
-  echo [ERR ] missing 'bin\psexec.exe'
-	echo [INFO] search on google! http://www.google.co.jp/search?q=psexec.exe
+if not exist bin\psservice.exe (
+	echo [ERR ] missing 'bin\psservice.exe'
+	echo [INFO] search on google! http://www.google.co.jp/search?q=psservice.exe
 	pause
 	goto :EOB
 )
