@@ -1,0 +1,3 @@
+# #で始まる行はコメント行です。
+# dsquery 結果の DN のフィルタをします。
+# 各行は findstr /V /C:%filter_string% にて適用されます。
