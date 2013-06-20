@@ -28,7 +28,7 @@ if not exist conf\cmds_spec (
 )
 
 if "%cmd1%"=="" (
-    echo [ERR ] missing commands '%reqcmd1%' on 'conf\cmds_spec'
+	echo [ERR ] missing commands '%reqcmd1%' on 'conf\cmds_spec'
 	pause
 	goto :EOB
 )
