@@ -11,8 +11,10 @@ required
 
 todo
 ---
-- [x] test
-- [ ] test
+- [ ] usage
+- [ ] cmdcheck.bat
+- [ ] sql 2012 -> 2000
+- [ ] write log
 
 
 - - - 
