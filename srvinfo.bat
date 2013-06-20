@@ -15,34 +15,36 @@ if "%userdnsdomain%"=="" (
 	goto :EOB
 )
 
+set cmdsspec=conf\cmds_spec
 set domainstr=DC=%userdnsdomain:.=,DC=%
 set reqcmd1=dsquery.exe
 set reqcmd2=dsget.exe
 set cmd1=
 set cmd2=
+set PATH=%PATH%;%~d0%~p0\bin
 
 echo [INFO] call 'cmdcheck.bat'
 call cmdcheck.bat
 
-if not exist conf\cmds_spec (
-	echo [ERR ] missing 'conf\cmds_spec'
+if not exist %cmdsspec% (
+	echo [ERR ] missing '%cmdsspec%'
 	pause
 	goto :EOB
 ) else (
-	for /f "usebackq tokens=1,2 delims=	" %%x in (conf\cmds_spec) do (
+	for /f "usebackq tokens=1,2 delims=	" %%x in (%cmdsspec%) do (
 		if "%%x"=="%reqcmd1%" ( set cmd1=%%y )
 		if "%%x"=="%reqcmd2%" ( set cmd2=%%y )
 	)
 )
 
 if "%cmd1%"=="" (
-	echo [ERR ] missing commands '%reqcmd1%' on 'conf\cmds_spec'
+	echo [ERR ] missing commands '%reqcmd1%' on '%cmdsspec%'
 	pause
 	goto :EOB
 )
 
 if "%cmd2%"=="" (
-	echo [ERR ] missing commands '%reqcmd2%' on 'conf\cmds_spec'
+	echo [ERR ] missing commands '%reqcmd2%' on '%cmdsspec%'
 	pause
 	goto :EOB
 )

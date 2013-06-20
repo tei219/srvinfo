@@ -12,7 +12,7 @@ required
 todo
 ---
 - [ ] usage
-- [ ] cmdcheck.bat
+- [x] cmdcheck.bat
 - [ ] sql 2012 -> 2000
 - [ ] write log
 
@@ -27,3 +27,5 @@ shellはcloud9でいいね。
 共依存でもいいよね…  
 各バッチで呼び出すコマンドは conf\cmds_spec に集約  
 makelist.bat で対象をフィルタできるように  
+systeminfo 復活  
+よしよし  

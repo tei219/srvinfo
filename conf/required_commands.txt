@@ -1,3 +1,6 @@
 dsquery.exe
 dsget.exe
 systeminfo.exe
+cscript.exe
+psexec.exe
+psservice.exe

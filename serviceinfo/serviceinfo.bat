@@ -1,21 +1,31 @@
 @echo off
 
-if not exist bin\psservice.exe (
-	echo [ERR ] missing 'bin\psservice.exe'
-	echo [INFO] search on google! http://www.google.co.jp/search?q=psservice.exe
+set cmdsspec=..\conf\cmds_spec
+set reqcmd1=psservice.exe
+set cmd1=
+
+if not exist %cmdsspec% (
+    echo [ERR ] missing '%cmdsspec%'
+	echo [INFO] do 'cmdcheck.bat' first.
+	goto :EOB
+) else (
+	for /f "usebackq tokens=1,2 delims=	" %%x in (%cmdsspec%) do (
+		if "%%x"=="%reqcmd1%" ( set cmd1=%%y )
+	)
+)
+
+if "%cmd1%"=="" (
+	echo [ERR ] missing commands '%reqcmd1%' on '%cmdsspec%'
 	pause
 	goto :EOB
 )
 
-if not exist bin\1st_launch (
-	bin\psservice.exe /? >nul
-	echo 1 > bin\1st_launch
-)
-
+:do_batch
 if "%1"=="" (
-	echo "[ERR ] - missing target"
+	echo "[ERR ] missing target"
 ) else (
-	bin\psservice.exe \\%1 query  > %1.txt
+	echo [INFO] "%cmd1% \\%1 query > %1.txt"
+	%cmd1% \\%1 query > %1.txt
 )
 
 :EOB

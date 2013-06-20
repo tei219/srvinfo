@@ -1,7 +1,7 @@
 @echo off
 
 set cmdsspec=..\conf\cmds_spec
-set reqcmd1=psexec.exe
+set reqcmd1=systeminfo.exe
 set cmd1=
 
 if not exist %cmdsspec% (
@@ -24,8 +24,8 @@ if "%cmd1%"=="" (
 if "%1"=="" (
 	echo "[ERR ] missing target"
 ) else (
-	echo [INFO] "%cmd1% \\%1 -s cmd /C set > %1.txt"
-	%cmd1% \\%1 -s cmd /C set > %1.txt
+	echo [INFO] "%cmd1% /s %1 > %1.txt"
+	%cmd1% /s %1 > %1.txt
 )
 
 :EOB

@@ -24,8 +24,8 @@ if "%cmd1%"=="" (
 if "%1"=="" (
 	echo "[ERR ] missing target"
 ) else (
-	echo [INFO] "%cmd1% \\%1 -s cmd /C set > %1.txt"
-	%cmd1% \\%1 -s cmd /C set > %1.txt
+	echo [INFO] "%cmd1% \\%1 -s ipconfig.exe /all > %1.txt"
+	%cmd1% \\%1 -s ipconfig.exe /all > %1.txt
 )
 
 :EOB
