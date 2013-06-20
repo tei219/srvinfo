@@ -1,0 +1,3 @@
+dsquery.exe
+dsget.exe
+systeminfo.exe

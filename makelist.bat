@@ -8,26 +8,40 @@ if exist list.txt ( del list.txt )
 if exist list ( del list )
 
 if "%userdnsdomain%"=="" (
-	echo "[ERR ] empty domain string '%userdnsdomain%'"
+    echo "[ERR ] empty domain string '%userdnsdomain%'"
 	pause
 	goto :EOB
 )
 
-set domainstr=CN=Computers,DC=%userdnsdomain:.=,DC=%
+set domainstr=DC=%userdnsdomain:.=,DC=%
+set reqcmd1=dsquery.exe
+set cmd1=
 
-for %%c in (dsquery.exe) do (
-	if exist %%~$path:c (
-		echo %%~$path:c 
-	) else (
-		echo [ERR ] missing 'dsquery.exe'
-		echo [INFO] search on google! "https://www.google.co.jp/search?q=dsquery.exe"
-		pause
-		goto :EOB
+if not exist conf\cmds_spec (
+	echo [ERR ] missing 'conf\cmds_spec'
+	echo [INFO] do 'cmdcheck.bat' first.
+	goto :EOB
+) else (
+	for /f "usebackq tokens=1,2 delims=	" %%x in (conf\cmds_spec) do (
+		if "%%x"=="%reqcmd1%" ( set cmd1=%%y )
 	)
 )
 
-echo dsquery computer %domainstr% -limit 10000 -scope onelevel
-dsquery computer %domainstr% -limit 10000 -scope onelevel > list
+if "%cmd1%"=="" (
+	echo [ERR ] missing commands on 'conf\cmds_spec'
+	pause
+	goto :EOB
+)
+
+echo [INFO] %cmd1% computer %domainstr% -limit 10000
+%cmd1% computer %domainstr% -limit 10000 > list
+
+if exist conf\ignore_dn.txt (
+	for /f "usebackq tokens=* " %%s in (conf\ignore_dn.txt) do (
+		call :do_filter %%s
+	)
+)
+
 for /f "usebackq delims=," %%a in (list) do (
 	for /f "usebackq delims== tokens=2" %%c in (`echo %%a`) do (
 		echo %%c
@@ -36,8 +50,20 @@ for /f "usebackq delims=," %%a in (list) do (
 )
 
 for /f %%s in (listall.txt) do (
-	ping >nul -a -n 1 -w 1 -4 %%s && echo %%s >> list.txt || echo [ERR ] ping-test %%s failed.
+	(ping >nul -a -n 1 -w 1 -4 %%s && echo %%s >> list.txt) || echo [ERR ] ping-test %%s failed.
 )
+goto :EOB
+
+:do_filter
+	set filter_string=%*
+	if not ^%filter_string:~0,1%==^# (
+		echo [INFO] filtered by '%filter_string%'
+		type list | findstr /V /C:%filter_string% > tmp
+		move >nul /y tmp list
+		del tmp
+	)
+exit /b
+
 
 :EOB
 if exist list ( del list )

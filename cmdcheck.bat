@@ -3,19 +3,36 @@ setlocal
 pushd %CD%
 cd /d %~d0%~p0
 
-if exist missing_commands ( del missing_commands )
+if exist cmd_missing ( del cmd_missing )
+if exist conf\cmds_spec ( del conf\cmds_spec )
 
-for /f "usebackq" %%c in (`dir /b /s *.required`) do (
-    call :checkcmd %%c
-)
-goto :EOB
-
-:checkcmd
-	if not exist %~d1%~p1%~n1 (
-		echo [ERR ] missing command! %~d1%~p1%~n1
-		echo %~d1%~p1%~n1 > missing_commands
+if exist conf\required_commands.txt (
+    for /f "usebackq tokens=*" %%c in (`type conf\required_commands.txt`) do (
+		for %%b in (%%c) do (
+			if exist %%~$path:b (
+				echo %%b	%%~$path:b >> conf\cmds_spec
+			) else (
+				echo [ERR ] missing '%%c'
+				echo [INFO] search on google! "http://www.google.co.jp/search?q=%%c"
+				echo 1 > cmd_missing
+				pause
+			)
+		)
 	)
-exit /b
+) else (
+	echo [ERR ] missing 'conf\required_commands.txt'
+	goto :EOB
+)
+
+if exist cmd_missing (
+	del conf\cmds_spec
+)
+
+if exist conf\cmds_spec (
+	echo [INFO] created 'conf\cmds_spec' 
+) else (
+	echo [ERR ] command check failed.
+)
 
 :EOB
 
