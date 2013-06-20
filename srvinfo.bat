@@ -1,6 +1,6 @@
 @echo off
 if "%~d0"=="\\" (
-  echo.
+    echo.
 	echo [ERR ] - not support UNC
 	pause
 	goto :EOF
@@ -16,34 +16,42 @@ if "%userdnsdomain%"=="" (
 )
 
 set domainstr=DC=%userdnsdomain:.=,DC=%
+set reqcmd1=dsquery.exe
+set reqcmd2=dsget.exe
+set cmd1=
+set cmd2=
 
-for %%b in (dsquery.exe) do (
-	if exist %%~$path:b (
-		echo %%~$path:b 
-	) else (
-		echo [ERR ] missing 'dsquery.exe'
-		echo [INFO] search on google! "http://www.google.co.jp/search?q=dsquery.exe"
-		pause
-		goto :EOB
+echo [INFO] call 'cmdcheck.bat'
+call cmdcheck.bat
+
+if not exist conf\cmds_spec (
+	echo [ERR ] missing 'conf\cmds_spec'
+	pause
+	goto :EOB
+) else (
+	for /f "usebackq tokens=1,2 delims=	" %%x in (conf\cmds_spec) do (
+		if "%%x"=="%reqcmd1%" ( set cmd1=%%y )
+		if "%%x"=="%reqcmd2%" ( set cmd2=%%y )
 	)
 )
 
-for %%b in (dsget.exe) do (
-	if exist %%~$path:b (
-		echo %%~$path:b 
-	) else (
-		echo [ERR ] missing 'dsget.exe'
-		echo [INFO] search on google! "http://www.google.co.jp/search?q=dsget.exe"
-		pause
-		goto :EOB
-	)
+if "%cmd1%"=="" (
+	echo [ERR ] missing commands '%reqcmd1%' on 'conf\cmds_spec'
+	pause
+	goto :EOB
 )
 
-echo dsquery user %domainstr% -samid "%username%"
-dsquery user %domainstr% -samid "%username%" > dn
+if "%cmd2%"=="" (
+	echo [ERR ] missing commands '%reqcmd2%' on 'conf\cmds_spec'
+	pause
+	goto :EOB
+)
+
+echo %cmd1% user %domainstr% -samid "%username%"
+%cmd1% user %domainstr% -samid "%username%" > dn
 for /f "eol=; usebackq tokens=*" %%a in (`type dn`) do (
-	echo dsget user %%a -memberof
-	(dsget user %%a -memberof | findstr /C:"Domain Admins" && goto :usercheck_ok) || goto :usercheck_fail
+	echo %cmd2% user %%a -memberof
+	(%cmd2% user %%a -memberof | findstr /C:"Domain Admins" && goto :usercheck_ok) || goto :usercheck_fail
 )
 
 :usercheck_fail
@@ -58,8 +66,7 @@ if exist list.txt (
 	)
 ) else (
 	echo [ERR ] missing list.txt
-	echo [INFO] make list.txt ...
-	pause
+	echo [INFO] do 'makelist.bat' ...
 	call makelist.bat
 )
 
