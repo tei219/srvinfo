@@ -9,6 +9,12 @@ required
 * systeminfo.exe | [info](http://technet.microsoft.com/en-us/library/bb491007.aspx)  
 * [psexec.exe](https://www.google.co.jp/search?q=psexec.exe) | [info](http://technet.microsoft.com/en-us/sysinternals/bb897553.aspx)  
 
+todo
+---
+- [x] test
+- [ ] test
+
+
 - - - 
 フォルダってどうやって作るの…？  
 わはははは  
