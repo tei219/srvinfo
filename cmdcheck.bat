@@ -4,6 +4,7 @@ pushd %CD%
 cd /d %~d0%~p0
 
 set cmdsspec=conf\cmds_spec
+set PATH=%PATH%;%~d0%~p0\bin
 
 if exist cmd_missing ( del cmd_missing )
 if exist %cmdsspec% ( del %cmdsspec% )

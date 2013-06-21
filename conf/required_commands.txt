@@ -6,3 +6,5 @@ psexec.exe
 psservice.exe
 msinfo32.exe
 wmic.exe
+sc.exe
+sqlcmd.exe
