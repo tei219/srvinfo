@@ -29,3 +29,5 @@ shellはcloud9でいいね。
 makelist.bat で対象をフィルタできるように  
 systeminfo 復活  
 よしよし  
+あれだな、採取するやつは選べるようにしないといかんな  
+
