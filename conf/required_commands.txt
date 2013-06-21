@@ -4,3 +4,5 @@ systeminfo.exe
 cscript.exe
 psexec.exe
 psservice.exe
+msinfo32.exe
+wmic.exe

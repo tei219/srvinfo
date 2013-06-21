@@ -1,7 +1,7 @@
 @echo off
 
 set cmdsspec=..\conf\cmds_spec
-set reqcmd1=wmic.exe
+set reqcmd1=msinfo32.exe
 set cmd1=
 
 if not exist %cmdsspec% (
@@ -24,8 +24,8 @@ if "%cmd1%"=="" (
 if "%1"=="" (
 	echo "[ERR ] missing target"
 ) else (
-	echo [INFO] "%cmd1% /node:%1 environment list > %1.txt"
-	%cmd1% /node:%1 environment list > %1.txt
+	echo [INFO] "%cmd1% /computer %1 /report %1.txt"
+	%cmd1% /computer %1 /report %1.txt
 )
 
 :EOB
