@@ -13,7 +13,7 @@ todo
 ---
 - [ ] usage
 - [x] cmdcheck.bat
-- [ ] sql 2012 -> 2000
+- [x] sql 2012 -> 2000
 - [ ] write log
 
 
