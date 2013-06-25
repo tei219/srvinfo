@@ -1,6 +1,6 @@
 srvinfo
 =======
-server infomation gatherer for (alomost all) Windows Servers.
+server information gatherer for (alomost all) Windows Servers.
 
 required
 ---
