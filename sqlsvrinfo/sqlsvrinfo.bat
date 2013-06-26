@@ -32,7 +32,6 @@ if "%cmd2%"=="" (
 
 if exist tmp ( del tmp )
 if exist instances ( del instances )
-if exist error ( del error )
 
 :do_batch
 if "%1"=="" (
