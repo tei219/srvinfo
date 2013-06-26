@@ -80,8 +80,19 @@ for /f "usebackq" %%c in (`dir /b /a:d`) do (
 	if exist %%c\%%c.bat (
 		echo [INFO] entering %%c\ ...
 		cd /d %%c\
-		echo [INFO] do %%c\%%c.bat %target%
-		call %%c.bat %target%
+		if exist ..\conf\selection.txt (
+			type ..\conf\selection.txt | findstr >nul /R /C:"^%%c$"  && echo 1 > selected
+			if exist selected (
+				echo [INFO] do %%c\%%c.bat %target%
+				call %%c.bat %target%
+				del selected
+			) else (
+				echo [INFO] nothing to do.
+			)
+		) else (
+			echo [INFO] do %%c\%%c.bat %target%
+			call %%c.bat %target%
+		)
 		echo [INFO] exiting %%c\ ...
 		cd ..
 		echo -----------------------

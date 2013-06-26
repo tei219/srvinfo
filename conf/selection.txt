@@ -1,0 +1,7 @@
+systeminfo
+diskmapinfo
+ipconfiginfo
+iprouteinfo
+envinfo
+psinfo
+serviceinfo

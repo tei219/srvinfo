@@ -1,16 +1,16 @@
 
 --version
-print '--version'+replicate('-',80)
+print '--version'+replicate('=',80)
 select @@version as '@@version'
 go
 
 --traceflag status
-print '--traceflag status'+replicate('-',80)
+print '--traceflag status'+replicate('=',80)
 dbcc tracestatus(-1)
 GO
 
 --sp_configure
-print '--sp_configure'+replicate('-',80)
+print '--sp_configure'+replicate('=',80)
 exec sp_configure 'show advanced options', 1
 go
 reconfigure
@@ -23,42 +23,42 @@ reconfigure
 go
 
 --sp_helpdb
-print '--sp_helpdb'+replicate('-',80)
+print '--sp_helpdb'+replicate('=',80)
 exec sp_helpdb
 
 --file spec
-print '--file spec'+replicate('-',80)
+print '--file spec'+replicate('=',80)
 exec sp_MSforeachdb @command1 = '
     use ?
 	select ''?'' as dbname,* from sysfiles
 '
 
 --xp_msver
-print '--xp_msver'+replicate('-',80)
+print '--xp_msver'+replicate('=',80)
 exec master.dbo.xp_msver
 
 --syslogins
-print '--syslogins'+replicate('-',80)
+print '--syslogins'+replicate('=',80)
 select * from master.dbo.syslogins
 
 --exec msdb.dbo.sp_help_job
-print '--sp_help_job'+replicate('-',80)
+print '--sp_help_job'+replicate('=',80)
 exec msdb.dbo.sp_help_job
 
 --sysservers
-print '--sysservers'+replicate('-',80)
+print '--sysservers'+replicate('=',80)
 select * from sysservers where isremote = 0
 
 --sysalerts
-print '--sysalerts'+replicate('-',80)
+print '--sysalerts'+replicate('=',80)
 select * from msdb.dbo.sysalerts
 
 --sysmessages
-print '--sysmessages'+replicate('-',80)
+print '--sysmessages'+replicate('=',80)
 select * from sysmessages where msglangid = 1041
 
 --user spec
-print '--user spec'+replicate('-',80)
+print '--user spec'+replicate('=',80)
 declare @@tabname varchar(32)
 declare @@stmt varchar(1024)
 

@@ -63,10 +63,8 @@ if "%instance_name%"=="MSSQLSERVER" (
 	set outputfilename=%target%_%instance_name:MSSQL$=%.txt
 )
 
-echo %instance_name% >> error
-echo [INFO] ""%cmd2%" -E -S %instance_name% -Q "set nocount on; select @@version" > %outputfilename%"
-"%cmd2%" -E -S %instance_name% -Q "set nocount on; select @@version" 1> %outputfilename% 2>> error
-echo. >> error
+echo [INFO] ""%cmd2%" -E -S %instance_name% -i sqlsvrinfo.sql -W -o %outputfilename% -s "	" -l 3 -t 180"
+"%cmd2%" -E -S %instance_name% -i sqlsvrinfo.sql -W -o %outputfilename% -s "	" -l 3 -t 180
 
 exit /b
 
