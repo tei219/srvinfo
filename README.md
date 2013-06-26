@@ -43,4 +43,4 @@ systeminfo 復活
 よしよし  
 あれだな、採取するやつは選べるようにしないといかんな  
 conf\selection.txt で選べるようになりました  
-
+まあ mpsreport 使えって話だよね [mpsreport](http://technet.microsoft.com/ja-jp/magazine/jj860527.aspx)  
