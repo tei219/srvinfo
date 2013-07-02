@@ -47,15 +47,15 @@ exec msdb.dbo.sp_help_job
 
 --sysservers
 print '--sysservers'+replicate('=',80)
-select * from sysservers where isremote = 0
+select * from sysservers where dataaccess = 1
 
 --sysalerts
 print '--sysalerts'+replicate('=',80)
 select * from msdb.dbo.sysalerts
 
 --sysmessages
-print '--sysmessages'+replicate('=',80)
-select * from sysmessages where msglangid = 1041
+--print '--sysmessages'+replicate('=',80)
+--select * from sysmessages where msglangid = 1041
 
 --user spec
 print '--user spec'+replicate('=',80)
