@@ -8,3 +8,4 @@ msinfo32.exe
 wmic.exe
 sc.exe
 sqlcmd.exe
+uptime.exe
