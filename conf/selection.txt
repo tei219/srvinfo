@@ -1,2 +1,3 @@
 systeminfo
 diskmapinfo
+uptimeinfo
