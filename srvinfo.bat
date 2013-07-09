@@ -22,6 +22,10 @@ set reqcmd2=dsget.exe
 set cmd1=
 set cmd2=
 set PATH=%PATH%;%~d0%~p0\bin
+set listname=list.txt
+if not "%1" == "" (
+	set listname=%1
+)
 
 echo [INFO] call 'cmdcheck.bat'
 call cmdcheck.bat
@@ -62,14 +66,16 @@ pause
 goto :EOB
 
 :usercheck_ok
-if exist list.txt (
-	for /f %%d in (list.txt) do (
+if exist %listname% (
+	for /f %%d in (%listname%) do (
 		call :do_collect %%d
 	)
 ) else (
-	echo [ERR ] missing list.txt
-	echo [INFO] do 'makelist.bat' ...
-	call makelist.bat
+	echo [ERR ] missing %listname%
+	if "%1" == "" (
+		echo [INFO] do 'makelist.bat' ...
+		call makelist.bat
+	)
 )
 
 goto :EOB
