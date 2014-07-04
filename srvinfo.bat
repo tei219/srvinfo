@@ -1,6 +1,6 @@
 @echo off
 if "%~d0"=="\\" (
-    echo.
+	echo.
 	echo [ERR ] - not support UNC
 	pause
 	goto :EOF
