@@ -67,7 +67,7 @@ goto :EOB
 
 :usercheck_ok
 if exist %listname% (
-	for /f %%d in (%listname%) do (
+	for /f "usebackq" %%d in (`findstr /V /G:conf\ignore_server.txt %listname%`) do (
 		call :do_collect %%d
 	)
 ) else (
